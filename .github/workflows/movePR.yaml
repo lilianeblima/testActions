@@ -13,6 +13,6 @@ jobs:
           project: 'Releases'
           column: 'Done'
           owner: 'lilianeblima'
-          repo: 'testActions
+          repo: 'testActions'
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: chore/configRepo
