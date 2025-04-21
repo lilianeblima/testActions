@@ -19,7 +19,7 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
           USER: "lilianeblima"
-          PROJECT_NUMBER: 2
+          PROJECT_NUMBER: "2"
         run: |
           gh api graphql -f query='
             query($user: String!, $number: Int!) {
