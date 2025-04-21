@@ -51,9 +51,9 @@ jobs:
       echo 'TODO_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="Done") |.id' project_data.json) >> $GITHUB_ENV
 
     - name: Add PR to project
-          env:
-            GH_TOKEN: ${{ secrets.YOUR_TOKEN }}
-            PR_ID: ${{ github.event.pull_request.node_id }}
+      env:
+          GH_TOKEN: ${{ secrets.YOUR_TOKEN }}
+          PR_ID: ${{ github.event.pull_request.node_id }}
 
     run: |
             item_id="$( gh api graphql -f query='
@@ -68,11 +68,11 @@ jobs:
               echo 'ITEM_ID='$item_id >> $GITHUB_ENV
 
     - name: Get date
-          run: echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
+      run: echo "DATE=$(date +"%Y-%m-%d")" >> $GITHUB_ENV
 
     - name: Set fields
-          env:
-            GH_TOKEN: ${{ secrets.YOUR_TOKEN }}
+      env:
+          GH_TOKEN: ${{ secrets.YOUR_TOKEN }}
       run: |
             gh api graphql -f query='
               mutation (
