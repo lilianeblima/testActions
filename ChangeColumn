@@ -11,4 +11,4 @@ jobs:
         project-url: "https://github.com/orgs/github/projects/"
         column-name: "Done"
         label-name: "MoveToDone"
-        columns-to-ignore: "Backlog,In Review, In Progress"
+        columns-to-ignore: "Backlog, Ready,In Review, In Progress"
