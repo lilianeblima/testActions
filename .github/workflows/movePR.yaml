@@ -16,38 +16,38 @@ jobs:
         PROJECT_NUMBER: "2"
 
       run: |
-      gh api graphql -f query='
-        query($user: String!, $projectNumber: Int!) {
-          user(login: $user) {
-            projectV2(number: $projectNumber) {
-            id
-            fields(first: 20) {
-              nodes {
-                ... on ProjectV2Field {
-                  id
-                  name
-                }
-                ... on ProjectV2SingleSelectField {
-                  id
-                  name
-                  options {
+        gh api graphql -f query='
+          query($user: String!, $projectNumber: Int!) {
+            user(login: $user) {
+              projectV2(number: $projectNumber) {
+              id
+              fields(first: 20) {
+                nodes {
+                  ... on ProjectV2Field {
                     id
                     name
+                  }
+                  ... on ProjectV2SingleSelectField {
+                    id
+                    name
+                    options {
+                      id
+                      name
+                    }
                   }
                 }
               }
             }
           }
-        }
-      }' -f user = $USER -F projectNumber = $PROJECT_NUMBER > project_data.json
+        }' -f user = $USER -F projectNumber = $PROJECT_NUMBER > project_data.json
 
-      echo 'PROJECT_ID ='$(jq '.data.user.projectV2.id' project_data.json) >> $GITHUB_ENV
+        echo 'PROJECT_ID ='$(jq '.data.user.projectV2.id' project_data.json) >> $GITHUB_ENV
 
-      echo 'DATE_FIELD_ID='$(jq '.data.user.projectV2.fields.nodes[] | select(.name== "Date posted") | .id' project_data.json) >> $GITHUB_ENV
+        echo 'DATE_FIELD_ID='$(jq '.data.user.projectV2.fields.nodes[] | select(.name== "Date posted") | .id' project_data.json) >> $GITHUB_ENV
 
-      echo 'STATUS_FIELD_ID='$(jq 'data.user.projectV2.notes[] | select(.name == "Status") | .id' project_data.json) >> $GITHUB_ENV
+        echo 'STATUS_FIELD_ID='$(jq 'data.user.projectV2.notes[] | select(.name == "Status") | .id' project_data.json) >> $GITHUB_ENV
 
-      echo 'TODO_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="Done") |.id' project_data.json) >> $GITHUB_ENV
+        echo 'TODO_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="Done") |.id' project_data.json) >> $GITHUB_ENV
 
     - name: Add PR to project
     env:
