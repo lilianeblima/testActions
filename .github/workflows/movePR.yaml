@@ -3,16 +3,13 @@ on:
   pull_request:
     types: [ labeled ]
 jobs:
-  move-issue-to-repository-project-column-on-pull-request:
-    name: Move issues to repository project column
+  Move_Labeled_Issue_On_Project_Board:
     runs-on: ubuntu-latest
     steps:
-      - name: Move all issues related to current PR(into main branch) and child PRs to 'Done' column
-        uses: fojia/action-move-issues-to-column@master
-        with:
-          project: 'Releases'
-          column: 'Done'
-          owner: 'lilianeblima'
-          repo: 'testActions'
-          github_token: ${{ secrets.ACTIONS }}
-          branch: chore/configRepo
+    - uses: konradpabjan/move-labeled-or-milestoned-issue@v2.0
+      with:
+        action-token: "${{ secrets.ACTIONS }}"
+        project-url: "https://github.com/users/lilianeblima/projects/2/views/1"
+        column-name: "Done"
+        label-name: "MoveToDone"
+        columns-to-ignore: "Backlog, Ready,In Review, In Progress"
