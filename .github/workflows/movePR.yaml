@@ -14,5 +14,5 @@ jobs:
           column: 'Done'
           owner: 'lilianeblima'
           repo: 'testActions'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ACTIONS }}
           branch: chore/configRepo
