@@ -8,7 +8,7 @@ jobs:
     - uses: konradpabjan/move-labeled-or-milestoned-issue@v2.0
       with:
         action-token: "${{ secrets.MY_TOKEN }}"
-        project-url: "https://github.com/orgs/github/projects/"
+        project-url: "https://github.com/users/lilianeblima/projects/2/views/1"
         column-name: "Done"
         label-name: "MoveToDone"
         columns-to-ignore: "Backlog, Ready,In Review, In Progress"
